@@ -6,28 +6,37 @@
  */
 
 let deck = [];
-const tipos = ['C', 'D', 'H', 'S'];
-const especiales = ['A', 'J', 'K', 'Q'];
+const types = ['C', 'D', 'H', 'S'];
+const specials = ['A', 'J', 'K', 'Q'];
 
-const crearDeck = () => {
+// this function creates a new deck
+const createDeck = () => {
     for (let i = 2; i <= 10; i++) {
-        for (let tipo of tipos) {
-            deck.push(i + tipo);
+        for (let type of types) {
+            deck.push(i + type);
         }
     }
-    for (let tipo of tipos) {
-        for (let esp of especiales) {
-            deck.push(esp + tipo);
+    for (let type of types) {
+        for (let esp of specials) {
+            deck.push(esp + type);
         }
     }
-    
-    console.log(deck);
 
     deck = _.shuffle(deck);
 
     console.log(deck);
 
-    return deck; 
+    return deck;
 }
 
-crearDeck();
+createDeck();
+
+//this function allows me to take a new card
+const askCard = () => {
+    const card = deck.pop();
+    console.log(deck);
+    console.log(card);
+    return card;
+}
+
+// askCard();
