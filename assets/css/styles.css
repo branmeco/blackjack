@@ -4,7 +4,7 @@ html, body {
     color: white;
 }
 
-.titulo{
+.tittle{
     text-align: center;
     background-color: black;
     color: white;
@@ -12,14 +12,14 @@ html, body {
     font-size: 25px;
 }
 
-.carta{
+.card{
     width: 150px;
     position: relative;
     left: 100px;
     margin-left: -75px;
 }
 
-#computadora-cartas,
-#jugador-carta {
+#computer-cards,
+#player-cards {
     height: 240px;
 }
