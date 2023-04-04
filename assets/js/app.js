@@ -9,6 +9,14 @@ let deck = [];
 const types = ['C', 'D', 'H', 'S'];
 const specials = ['A', 'J', 'K', 'Q'];
 
+let pointsPlayer = 0;
+let pointsComputer = 0;
+
+//Html references
+const btnAsk = document.querySelector('#btnAsk');
+
+const pointsHTML = document.querySelectorAll('small');
+
 // this function creates a new deck
 const createDeck = () => {
     for (let i = 2; i <= 10; i++) {
@@ -34,8 +42,6 @@ createDeck();
 //this function allows me to take a new card
 const askCard = () => {
     const card = deck.pop();
-    console.log(deck);
-    console.log(card);
     return card;
 }
 
@@ -44,11 +50,17 @@ const askCard = () => {
 const valueCard = (card) => {
     const value = card.substring(0, card.length - 1);
 
-    return (isNaN(value)) ? 
+    return (isNaN(value)) ?
         (value === 'A') ? 11 : 10
         : value * 1;
 
 }
 
-const value = valueCard(askCard());
-console.log({value});
+//Events
+btnAsk.addEventListener('click', () => {
+    const card = askCard();
+
+    pointsPlayer = pointsPlayer + valueCard(card);
+    pointsHTML[0].innerHTML = pointsPlayer;
+
+});
