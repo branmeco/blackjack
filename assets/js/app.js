@@ -6,27 +6,28 @@
  */
 
 let deck = [];
-const types = ['C', 'D', 'H', 'S'];
-const specials = ['A', 'J', 'K', 'Q'];
+const tipos = ['C', 'D', 'H', 'S'];
+const especiales = ['A', 'J', 'K', 'Q'];
 
-let pointsPlayer = 0;
-let pointsComputer = 0;
+let puntosJugador = 0;
+let puntosComputadora = 0;
 
 //Html references
-const btnAsk = document.querySelector('#btnAsk');
+const btnPedir = document.querySelector('#btnPedir');
 
-const pointsHTML = document.querySelectorAll('small');
+const divCartasJugador = document.querySelector('#jugador-cartas')
+const puntosHTML = document.querySelectorAll('small');
 
 // this function creates a new deck
-const createDeck = () => {
+const crearDeck = () => {
     for (let i = 2; i <= 10; i++) {
-        for (let type of types) {
-            deck.push(i + type);
+        for (let tipo of tipos) {
+            deck.push(i + tipo);
         }
     }
-    for (let type of types) {
-        for (let esp of specials) {
-            deck.push(esp + type);
+    for (let tipo of tipos) {
+        for (let esp of especiales) {
+            deck.push(esp + tipo);
         }
     }
 
@@ -37,30 +38,41 @@ const createDeck = () => {
     return deck;
 }
 
-createDeck();
+crearDeck();
 
 //this function allows me to take a new card
-const askCard = () => {
-    const card = deck.pop();
-    return card;
+const pedirCarta = () => {
+    const carta = deck.pop();
+    return carta;
 }
 
 // askCard();
 
-const valueCard = (card) => {
-    const value = card.substring(0, card.length - 1);
+const valorCarta = (carta) => {
+    const valor = carta.substring(0, carta.length - 1);
 
-    return (isNaN(value)) ?
-        (value === 'A') ? 11 : 10
-        : value * 1;
+    return (isNaN(valor)) ?
+        (valor === 'A') ? 11 : 10
+        : valor * 1;
 
 }
 
 //Events
-btnAsk.addEventListener('click', () => {
-    const card = askCard();
+btnPedir.addEventListener('click', () => {
+    const carta = pedirCarta();
 
-    pointsPlayer = pointsPlayer + valueCard(card);
-    pointsHTML[0].innerHTML = pointsPlayer;
+    puntosJugador = puntosJugador + valorCarta(carta);
+    puntosHTML[0].innerText = puntosJugador;
 
+    const imgCarta = document.createElement('img');
+    imgCarta.src = `assets/cartas/${carta}.png`;
+    imgCarta.classList.add('carta');
+    divCartasJugador.append(imgCarta);
+
+    if (puntosJugador > 21) {
+        btnPedir.disabled = true;
+    } else if (puntosJugador === 21) {
+        console.warn('21, Genial');
+        btnPedir.disabled = true;
+    }
 });
